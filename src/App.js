@@ -7,7 +7,7 @@ import "./styles.css";
 function App() {
   const [repositories, setRepositories] = useState([]);
 
-  //Get Repository List from BackEnd by API requests
+  //Get Repository List from BackEnd by API request
   useEffect(() => {
     api.get('repositories').then(response => {
       setRepositories(response.data);
@@ -15,8 +15,6 @@ function App() {
   }, []);
 
   async function handleAddRepository() {
-    // TODO
-
     //Calling API to POST / CREATE a new Repository
     const response = await api.post('repositories', {
       url: "https://github.com/josepholiveira",
@@ -32,8 +30,6 @@ function App() {
   }
 
   async function handleRemoveRepository(id) {
-    // TODO    
-
     //Calling API to DELETE a Repository
     api.delete(`repositories/${id}`);
 
@@ -44,9 +40,9 @@ function App() {
     if (repositoryIndex > -1) {
 
       //Updating Repositories' array without Repository Deleted
-
       repositories.splice(repositoryIndex, 1);
 
+      //Updating State 'Repositories'
       setRepositories([...repositories]);
     }    
 
