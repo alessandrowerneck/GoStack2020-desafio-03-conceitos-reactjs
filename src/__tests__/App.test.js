@@ -17,23 +17,12 @@ const actWait = async (amount = 0) => {
   });
 };
 
-console.log(`API -> [${api.baseURL}]`);
-console.log(`MockAdapter -> [${apiMock.url}]`);
-
-
 describe("App component", () => {
   it("should be able to add new repository", async () => {
     const { getByText, getByTestId } = render(<App />);
 
-    console.log('Should be able to add new repository');
-
-    console.log(`API -> [${api.baseURL}]`);
-console.log(`MockAdapter -> [${apiMock.url}]`);
-
-    console.log('onGet ->');
     apiMock.onGet("repositories").reply(200, []);
 
-    console.log('onPost ->');
     apiMock.onPost("repositories").reply(200, {
       id: "123",
       url: "https://github.com/josepholiveira",
@@ -43,12 +32,10 @@ console.log(`MockAdapter -> [${apiMock.url}]`);
 
     await actWait();
 
-    console.log('getBtText -> Adicionar');
     fireEvent.click(getByText("Adicionar"));
 
     await actWait();
 
-    console.log('Encontrar "repository-list" -> e o texto "Desafio ReactJS".');
     expect(getByTestId("repository-list")).toContainElement(
       getByText("Desafio ReactJS")
     );
@@ -56,8 +43,6 @@ console.log(`MockAdapter -> [${apiMock.url}]`);
 
   it("should be able to remove repository", async () => {
     const { getByText, getByTestId } = render(<App />);
-
-    console.log('Should be able to remove repository');
 
     apiMock.onGet("repositories").reply(200, [
       {
